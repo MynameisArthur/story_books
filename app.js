@@ -14,6 +14,9 @@ if (process.env.NODE_ENV === 'development') {
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', ' .hbs');
 
+//Routes
+app.use('/', require('./routes/index'));
+
 //Load config
 dotenv.config({ path: './config/config.env' });
 connectDB();
