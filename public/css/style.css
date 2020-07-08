@@ -1,8 +1,11 @@
-.login-container{
+.login-container {
     width: 400px;
     margin-top: 50px;
     text-align: center;
 }
-p{
-    margin: 10px 0!important;
+p {
+    margin: 10px 0 !important;
+}
+.fa-small {
+    font-size: 16px !important;
 }
