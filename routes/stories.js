@@ -9,6 +9,7 @@ const Story = require('../models/Story');
 router.get('/add', ensureAuth, (req, res) => {
     res.render('stories/add');
 });
+
 //@desc Process add form
 //@route POST /stories
 router.post('/', ensureAuth, async (req, res) => {
@@ -110,6 +111,22 @@ router.delete('/:id', ensureAuth, async (req, res) => {
     try {
         await Story.remove({_id: req.params.id});
         res.redirect('/dashboard');
+    } catch (err) {
+        console.log(err);
+        return res.render('error/500');
+    }
+});
+//@desc User stories
+//@route GET /stories/user/:userId
+router.get('/user/:userId', ensureAuth, async (req, res) => {
+    try {
+        const stories = await Story.find({
+            user: req.params.userId,
+            status: 'public',
+        })
+            .populate('user')
+            .lean();
+        res.render('stories/index', {stories});
     } catch (err) {
         console.log(err);
         return res.render('error/500');
